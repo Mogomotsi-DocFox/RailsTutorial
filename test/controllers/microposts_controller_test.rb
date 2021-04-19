@@ -17,7 +17,7 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
 
 
 
-  test "GET #new_micropost renders the new page" do
+  test "GET #micropost renders the micropost" do
     get micropost_url(@micropost)
     assert_response :success
   end
