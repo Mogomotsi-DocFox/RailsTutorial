@@ -2,7 +2,7 @@ require "test_helper"
 
 class MicropostsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @micropost = microposts(:one)
+    @micropost = microposts(:most_recent)
   end
 
   test "GET #microposts renders the microposts page" do
@@ -14,8 +14,6 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
     get new_micropost_url
     assert_response :success
   end
-
-
 
   test "GET #new_micropost renders a specific post" do
     get micropost_url(@micropost)
