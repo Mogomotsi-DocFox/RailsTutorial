@@ -2,35 +2,30 @@ require "test_helper"
 
 class MicropostsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @micropost = microposts(:most_recent)
+    @micropost = microposts(:orange)
   end
 
-  test "GET #microposts renders the microposts page" do
-    get microposts_url
-    assert_response :success
-  end
-
-  test "GET #new_micropost renders the new page" do
-    get new_micropost_url
-    assert_response :success
-  end
-
-  test "GET #new_micropost renders a specific post" do
-    get micropost_url(@micropost)
-    assert_response :success
-  end
-
-  test "GET #renders the edit page" do
-    get edit_micropost_url(@micropost)
-    assert_response :success
-  end
-
-
-  test "DELETE #delete the micropost" do
-    assert_difference('Micropost.count', -1) do
-      delete micropost_url(@micropost)
+  test "should redirect create when not logged in" do
+    assert_no_difference 'Micropost.count' do
+    post microposts_path params: { micropost: { content: "Lorem ipsum" } }
     end
-
-    assert_redirected_to microposts_url
+    assert_redirected_to login_url
   end
+
+  test "should redirect destroy when not logged in" do
+    assert_no_difference 'Micropost.count' do
+      delete micropost_path(@micropost)
+    end
+    assert_redirected_to login_url
+  end
+
+  test "should redirect destroy for wrong micropost" do
+    log_in_as(users(:michael))
+    micropost = microposts(:ants)
+    assert_no_difference 'Micropost.count' do
+          delete micropost_path(micropost)
+    end
+    assert_redirected_to root_url
+  end
+
 end

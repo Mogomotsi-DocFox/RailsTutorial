@@ -28,6 +28,9 @@ gem 'bcrypt'
 gem 'faker', '2.11.0'
 gem 'will_paginate', '3.3.0'
 gem 'bootstrap-will_paginate', '1.0.0'
+gem 'active_storage_validations', '0.8.9'
+gem 'image_processing',           '1.9.3'
+ gem 'mini_magick', '4.9.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -70,6 +73,7 @@ end
 
 group :production do
 gem 'pg'
+gem 'aws-sdk-s3', '1.46.0', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
