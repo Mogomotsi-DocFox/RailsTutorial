@@ -8,9 +8,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
-    binding.pry
-
     @user = User.find(params[:id])
     redirect_to root_url and return unless current_user?(@user)
   end
